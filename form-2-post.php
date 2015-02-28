@@ -8,7 +8,7 @@ Author: Raphael Ramos
 Author URI: http://www.raphaelramos.com.br/
 Text Domain: form-2-post
 Domain Path: /lang/
-Version: 0.21
+Version: 0.22
 Date: 2015-02-28
 */
 
@@ -153,10 +153,10 @@ Date: 2015-02-28
 					require_once ABSPATH .'wp-admin/includes/image.php';
 					$att_data = wp_generate_attachment_metadata( $att_id, $new_file );
 					wp_update_attachment_metadata( $att_id, $att_data );
-				}
 			
-				// return true;
-				return $uploads[ 'baseurl' ] .'/'. $att_data[ 'file' ];
+					// return true;
+					return $uploads[ 'baseurl' ] .'/'. $att_data[ 'file' ];
+				}
 			}
 			return false;
 		}
