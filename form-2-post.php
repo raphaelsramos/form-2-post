@@ -8,7 +8,7 @@ Author: Raphael Ramos
 Author URI: http://www.raphaelramos.com.br/
 Text Domain: form-2-post
 Domain Path: /lang/
-Version: 0.2
+Version: 0.21
 Date: 2015-02-28
 */
 
@@ -146,7 +146,7 @@ Date: 2015-02-28
 				'post_content'      => '',
 				'post_status'       => 'inherit',
 			);
-			if( $att_id = wp_insert_attachment( $attachment, $new_file, $pid ) )
+			if( $att_id = wp_insert_attachment( $attachment, $new_file, $pid ) ){
 			
 				// Test for an image and only perform the rest if the upload is an image...
 				if( @getimagesize( $new_file ) !== false ){
