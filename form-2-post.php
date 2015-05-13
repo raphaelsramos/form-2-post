@@ -8,8 +8,8 @@ Author: Raphael Ramos
 Author URI: http://www.raphaelramos.com.br/
 Text Domain: form-2-post
 Domain Path: /lang/
-Version: 0.3
-Date: 2015-05-02
+Version: 0.3.1
+Date: 2015-05-12
 */
 
 	class Form_2_Post {
@@ -199,6 +199,8 @@ Date: 2015-05-02
 				'form_id' => 0
 				, 'html_class' => ''
 				, 'html_id' => ''
+				, 'include_css' => false
+				, 'height' => ''
 			), $atts ) );
 			
 			$parent = get_post( $form_id );
@@ -211,12 +213,17 @@ Date: 2015-05-02
 			
 			$data = array();
 			
-			$html = array(
-				'<div'. $html_id .' class="f2p-viewer row'. $html_class .'">'
-					,'<h3>Formulário: '. $parent->post_title .'</h3>'
-					,'<div class="f2p-list col col-1of3">'
-					,'<ul>'
-			);
+			$html = array();
+			
+			if( $include_css !== false ) $html[] = '<link rel="stylesheet" href="'. plugin_dir_url( __FILE__ ) .'f2p.css" />'."\n";
+			
+			$style = '';
+			if( $height != '' ) $style = ' style="height: '. $height .'px"';
+			
+			$html[] = '<div'. $html_id .' class="f2p-viewer row'. $html_class .'">';
+			$html[] = '<h3>Formulário: '. $parent->post_title .'</h3>';
+			$html[] = '<div class="f2p-list col col-1of3"'. $style .'>';
+			$html[] = '<ul>';
 			
 			$q = new WP_Query( array( 'post_type' => $this->cpt, 'posts_per_page' => '-1', 'post_parent' => $form_id, 'post_status' => 'any' ) );
 			if( $q->have_posts() ){
@@ -231,7 +238,7 @@ Date: 2015-05-02
 			
 			$html[] = '</ul>';
 			$html[] = '</div>';
-			$html[] = '<div class="col col-2of3"><div class="f2p-content"></div></div>';
+			$html[] = '<div class="col col-2of3"><div class="f2p-content"'. $style .'></div></div>';
 			$html[] = '</div>';
 			$html[] = '<script>';
 			$html[] = 'var $f2p_data = '. json_encode( array( 'count' => count( $data ), 'data' => $data ) ) .';';

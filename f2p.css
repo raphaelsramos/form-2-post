@@ -4,9 +4,9 @@
  *==============================*/
 
 .f2p-viewer {}
-	.f2p-list {}
+	.f2p-list { height: 480px; overflow: auto }
 		.f2p-list ul {}
 		.f2p-list li {}
 		.f2p-list a { display: block; padding: 5px; border-bottom: 1px solid #333 }
 			.f2p-list a span {}
-	.f2p-content {}
+	.f2p-content { height: 480px; overflow: auto }
